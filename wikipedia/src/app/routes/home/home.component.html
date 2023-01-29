@@ -1,0 +1,213 @@
+<div class="container">
+  <div class="header flr">
+    <div class="header__logo flr">
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/49/49360.png"
+        alt="Logo"
+        class="header__logo-img"
+      />
+      <div class="header__logo-text">Wikipedia</div>
+    </div>
+    <div class="header__search">
+      <nz-input-group
+        [nzPrefix]="prefixTemplateUser"
+        [nzSuffix]="suffixIconButton"
+        [nzSize]="'small'"
+      >
+        <input
+          nz-input
+          class="header__search-input"
+          [(ngModel)]="fullTextSearch"
+          (keyup.enter)="nzOnSearch()"
+          placeholder="Tìm kiếm..." />
+        <ng-template #prefixTemplateUser
+          ><button
+            nz-button
+            nzType="text"
+            nzShape="circle"
+            (click)="nzOnSearch()"
+          >
+            <i class="fa-solid fa-magnifying-glass"></i></button
+        ></ng-template>
+        <ng-template #suffixIconButton>
+          <button
+            *ngIf="fullTextSearch != ''"
+            nz-button
+            nzType="text"
+            nzShape="circle"
+            (click)="onCancelSearch()"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button> </ng-template
+      ></nz-input-group>
+    </div>
+    <div class="header__action flr">
+      <div class="action__language">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/484/484582.png"
+          alt="Đổi ngôn ngữ"
+          class="action__language-icon"
+        />
+      </div>
+      <div class="action__add">
+        <i class="fa-solid fa-circle-plus action__add-icon"></i>
+      </div>
+      <div class="action__avatar">
+        <img
+          src="https://images.pexels.com/photos/3228769/pexels-photo-3228769.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          alt="Ảnh đại diện"
+          class="action__avatar-img"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="body">
+    <div class="search-word">
+      <h1>Bách khoa toàn thư</h1>
+    </div>
+    <div class="body-layout flr">
+      <div class="body__left-bar flc">
+        <ng-container *ngIf="barSwitch">
+          <img
+            src="https://images.pexels.com/photos/6173817/pexels-photo-6173817.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            alt="ảnh 1"
+            class="content__img"
+          />
+          <img
+            src="https://images.pexels.com/photos/6270215/pexels-photo-6270215.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            alt="ảnh 1"
+            class="content__img"
+          />
+        </ng-container>
+      </div>
+      <div class="body__main-content">
+        <div class="content__header flr">
+          <div class="content__header-text">Chi tiết</div>
+          <div class="content__header-like flr">
+            <p class="like__text">14326</p>
+            <i class="fa-solid fa-thumbs-up like__icon"></i>
+          </div>
+        </div>
+        <div class="content__body">
+          <div class="body__edited-date">23/05/2022</div>
+          <div class="body__description">
+            Daniel Kaluuya, né le 24 février 1989 à Londres, est un acteur
+            britannique. Il commence sa carrière par le théâtre puis se fait
+            remarquer à la télévision, dans quelques épisodes de la série
+            britannique Skins. Il joue ensuite des rôles importants dans les
+            minis-séries The Fades et Babylon. Il est finalement révélé au grand
+            public grâce au film d'horreur plébiscité Get Out, qui lui vaut de
+            nombreux prix et nominations. En 2018, il joue dans le blockbuster à
+            succès Black Panther et dans le drame salué Les Veuves. Il remporte
+            l'Oscar du meilleur acteur dans un second rôle en 2021 pour son
+            interprétation du militant afro-américan Fred Hampton dans le film
+            Judas and the Black Messiah.
+          </div>
+        </div>
+      </div>
+      <div class="body__right-bar">
+        <div class="bar__switch">
+          <nz-switch [(ngModel)]="barSwitch"></nz-switch>
+        </div>
+        <ng-container *ngIf="barSwitch">
+          <div class="bar-item">
+            <div class="item__header flr">
+              <div class="item__title flr">
+                <div class="item__title-text">Các tác giả</div>
+                <div class="item__title-number">12</div>
+              </div>
+              <div class="item__action">Xem tất cả</div>
+            </div>
+            <div class="item__body">
+              <nz-avatar-group>
+                <nz-avatar
+                  nzIcon="user"
+                  nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                  [nzSize]="'large'"
+                ></nz-avatar>
+                <nz-avatar
+                  style="background-color: #f56a00"
+                  nzText="U"
+                ></nz-avatar>
+                <nz-avatar
+                  style="background-color: #87d068"
+                  nz-tooltip
+                  nzTooltipTitle="NG-ZORRO User"
+                  nzIcon="user"
+                ></nz-avatar>
+                <nz-avatar
+                  style="background-color: #1890ff"
+                  nzText="NG"
+                ></nz-avatar>
+                <nz-avatar
+                  style="background-color: #fde3cf; color: #f56a00"
+                  nzText="+2"
+                ></nz-avatar>
+              </nz-avatar-group>
+            </div>
+          </div>
+          <div class="bar-item">
+            <div class="item__header">
+              <div class="item__title">
+                <div class="item__title-text">Tác giả tương tự</div>
+              </div>
+            </div>
+            <div class="item__body">
+              <nz-avatar-group>
+                <nz-avatar
+                  nzIcon="user"
+                  nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                ></nz-avatar>
+                <nz-avatar
+                  style="background-color: #f56a00"
+                  nzText="U"
+                ></nz-avatar>
+                <nz-avatar
+                  style="background-color: #87d068"
+                  nz-tooltip
+                  nzTooltipTitle="NG-ZORRO User"
+                  nzIcon="user"
+                ></nz-avatar>
+                <nz-avatar
+                  style="background-color: #1890ff"
+                  nzText="NG"
+                ></nz-avatar>
+                <nz-avatar
+                  style="background-color: #fde3cf; color: #f56a00"
+                  nzText="+2"
+                ></nz-avatar>
+              </nz-avatar-group>
+            </div>
+          </div>
+          <div class="bar-item">
+            <div class="item__header">
+              <div class="item__title">
+                <div class="item__title-text">Nguồn tham khảo</div>
+              </div>
+            </div>
+            <div class="item__body flc">
+              <div class="source__link">
+                <div class="source__link-text">
+                  https://www.imdb.com/name/nm2257207/
+                </div>
+                <div class="source__link-action">
+                  <i class="fa-solid fa-copy"></i>
+                </div>
+              </div>
+              <nz-divider></nz-divider>
+              <div class="source__link flr">
+                <div class="source__link-text">
+                  https://www.imdb.com/name/nm2257207/fwdasfsadfasdfasdfasdcdsc
+                </div>
+                <div class="source__link-action">
+                  <i class="fa-solid fa-copy source__link-icon"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
