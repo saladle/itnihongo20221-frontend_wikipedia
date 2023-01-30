@@ -15,11 +15,17 @@ export class AuthService {
   role: Role | any;
   usersList: any[] = [];
   currentUser: any;
+  guessUser = {
+    username: 'guess',
+    password: 'guess',
+    role: Role.Guess,
+    name: 'Guess',
+  };
 
   constructor(private router: Router) {
-    if (localStorage.getItem('currentUser') != null) {
+    if (localStorage.getItem('currentWikipediaUser') != null) {
       this.login_success = true;
-      this.currentUser = JSON.parse(localStorage.getItem('currentUser')!);
+      this.currentUser = JSON.parse(localStorage.getItem('currentWikipediaUser')!);
       this.role = this.currentUser.role;
     }
     this.usersList = [
@@ -51,7 +57,7 @@ export class AuthService {
           this.login_success = true;
           this.role = element.role;
           this.currentUser = element;
-          localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+          localStorage.setItem('currentWikipediaUser', JSON.stringify(this.currentUser));
         } else {
           this.login_success = false;
         }
@@ -61,8 +67,9 @@ export class AuthService {
   }
 
   logout() {
-    this.router.navigate(['']);
+    this.router.navigate(['login']);
     this.login_success = false;
+    localStorage.setItem('currentWikipediaUser', JSON.stringify(this.guessUser));
   }
 
   isAuthenticated() {

@@ -42,4 +42,9 @@ export class LoginComponent implements OnInit {
     // })
   }
 
+  continueAsGuest() {
+    this.authService.login('guess', 'guess');
+
+  }
+
 }

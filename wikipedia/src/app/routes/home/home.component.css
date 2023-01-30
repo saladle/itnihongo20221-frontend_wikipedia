@@ -62,7 +62,6 @@
   width: 60px;
   border-radius: 50%;
   cursor: pointer;
-
 }
 
 .body .search-word {
@@ -177,13 +176,13 @@
 
 .body__right-bar .bar-item .item__action {
   text-decoration: underline;
-    font-weight: 500;
-    cursor: pointer;
+  font-weight: 500;
+  cursor: pointer;
 }
 
 .body__right-bar .bar-item .item__body {
   height: 100px;
-  background: #F8F8F8;
+  background: #f8f8f8;
   border-radius: 15px;
   display: flex;
   align-items: center;
@@ -208,7 +207,7 @@
   flex-grow: 7;
   width: 200px;
   overflow: hidden;
-  text-overflow: ellipsis ;
+  text-overflow: ellipsis;
 }
 
 .body__right-bar .bar-item .source__link-action {

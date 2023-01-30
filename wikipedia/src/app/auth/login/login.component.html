@@ -1,7 +1,7 @@
 <div class="body">
-  <!-- <div class="logo">
-    <img src="https://i.postimg.cc/Z5wQKJmh/fchunters.png" alt="Logo" class="login__logo">
-  </div> -->
+  <div class="logo">
+    <img src="https://cdn-icons-png.flaticon.com/512/49/49360.png" alt="Logo" class="login__logo">
+  </div>
   <div class="form">
     <div nz-row>
       <div nz-col nzSpan="24">
@@ -9,7 +9,6 @@
           nz-form
           [formGroup]="loginForm"
           class="login-form"
-          (ngSubmit)="login()"
         >
           <nz-form-item>
             <nz-form-control nzErrorTip="Vui lòng nhập tên tài khoản!">
@@ -53,8 +52,16 @@
             nz-button
             class="login-form-button login-form-margin"
             [nzType]="'primary'"
+            (click)="login()"
           >
-            Log in
+            Đăng nhập
+          </button>
+          <button
+            nz-button
+            class="login-form-button login-form-margin"
+            (click)="continueAsGuest()"
+          >
+            Tiếp tục với tư cách khách
           </button>
           <!-- Or <a> register now! </a> -->
         </form>
