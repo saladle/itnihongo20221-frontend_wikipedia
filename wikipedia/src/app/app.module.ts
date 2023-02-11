@@ -13,6 +13,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './auth/login/login.component';
 import { NgZorroAntdModule } from './ng-zorro-antd.module';
 import { HomeComponent } from './routes/home/home.component';
+import { AddNewConceptComponent } from './routes/add-new-concept/add-new-concept.component';
+import { QuillModule } from 'ngx-quill';
+import { PostComponent } from './routes/post/post.component';
+import { NotFoundComponent } from './routes/not-found/not-found.component';
 
 registerLocaleData(en);
 
@@ -20,7 +24,10 @@ registerLocaleData(en);
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    AddNewConceptComponent,
+    PostComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -29,9 +36,10 @@ registerLocaleData(en);
     HttpClientModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    NgZorroAntdModule
+    NgZorroAntdModule,
+    QuillModule.forRoot(),
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

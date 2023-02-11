@@ -1,0 +1,202 @@
+<div class="container">
+  <div class="header flr px-12">
+    <div class="header__logo">Wikipedia</div>
+    <div class="header__action">
+      <a routerLink="/home">
+        <i class="fa-solid fa-right-from-bracket mr-12"></i>
+        Thoát
+      </a>
+    </div>
+  </div>
+  <div class="body">
+    <nz-layout>
+      <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+        <div class="logo"></div>
+        <ul nz-menu nzTheme="dark" nzMode="inline">
+          <li nz-submenu nzTitle="Bài viết" nzIcon="user">
+            <ul>
+              <li nz-menu-item><a routerLink="add">Thêm bài viết</a></li>
+              <li nz-menu-item>Danh sách bài viết</li>
+            </ul>
+          </li>
+          <li nz-submenu nzTitle="Team" nzIcon="team">
+            <ul>
+              <li nz-menu-item>Team 1</li>
+              <li nz-menu-item>Team 2</li>
+            </ul>
+          </li>
+          <li nz-menu-item>
+            <span nz-icon nzType="file"></span>
+            <span>File</span>
+          </li>
+        </ul>
+      </nz-sider>
+      <nz-layout>
+        <nz-header>
+          <span
+            class="trigger"
+            nz-icon
+            [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+            (click)="isCollapsed = !isCollapsed"
+          ></span>
+        </nz-header>
+        <nz-content>
+          <nz-breadcrumb>
+            <!-- <nz-breadcrumb-item>User</nz-breadcrumb-item>
+            <nz-breadcrumb-item>Bill</nz-breadcrumb-item> -->
+          </nz-breadcrumb>
+          <div class="content flr">
+            <form nz-form [formGroup]="createForm" class="flr">
+              <div class="inner-content">
+                <input
+                  nz-input
+                  placeholder="Nhập tiêu đề bài viết"
+                  [nzSize]="'large'"
+                  formControlName="name"
+                />
+                <h2 class="my-12">Nội dung bài viết</h2>
+                <quill-editor formControlName="description"></quill-editor>
+              </div>
+              <div class="action-bar ml-12">
+                <nz-card nzTitle="Xuất bản" [nzExtra]="extraTemplate">
+                  <p>Ngày đăng: {{ today | date : "dd/MM/yyyy" }}</p>
+                  <div class="flr">
+                    <p class="mr-12">Hiển thị công khai</p>
+                    <nz-switch formControlName="isPublic"></nz-switch>
+                  </div>
+                  <div class="flr jce">
+                    <button
+                      *ngIf="!isEditing"
+                      nz-button
+                      nzType="primary"
+                      (click)="onClickPublish(postSuccessNotification)"
+                    >
+                      Xuất bản ngay
+                    </button>
+                    <button
+                      *ngIf="isEditing"
+                      nz-button
+                      nzType="primary"
+                      (click)="onClickUpdate(updateSuccessNotification)"
+                    >
+                      Cập nhật
+                    </button>
+                  </div>
+                </nz-card>
+                <nz-card
+                  class="mt-12"
+                  nzTitle="Thông tin bổ sung"
+                  [nzExtra]="extraTemplate"
+                >
+                  <p>Thể loại</p>
+                  <div>
+                    <nz-select
+                      [nzMaxTagCount]="3"
+                      [nzMaxTagPlaceholder]="tagPlaceHolder"
+                      nzMode="multiple"
+                      nzPlaceHolder="Chọn thể loại"
+                      formControlName="topic"
+                    >
+                      <!-- [(ngModel)]="listOfSelectedValue" -->
+                      <nz-option
+                        *ngFor="let item of listOfOption"
+                        [nzLabel]="item"
+                        [nzValue]="item"
+                      ></nz-option>
+                    </nz-select>
+                    <ng-template #tagPlaceHolder let-selectedList
+                      >and {{ selectedList.length }} more selected</ng-template
+                    >
+                  </div>
+                  <p class="mt-12">Các đường link tham khảo</p>
+                  <nz-tag
+                    *ngFor="let tag of listOfReferencesLink; let i = index"
+                    [nzMode]="'closeable'"
+                    (nzOnClose)="handleClose(tag)"
+                  >
+                    {{ sliceTagName(tag) }}
+                  </nz-tag>
+                  <nz-tag
+                    *ngIf="!inputVisible"
+                    class="editable-tag"
+                    nzNoAnimation
+                    (click)="showInput()"
+                  >
+                    <span nz-icon nzType="plus"></span>
+                    Thêm đường link
+                  </nz-tag>
+                  <input
+                    #inputElement
+                    nz-input
+                    nzSize="small"
+                    *ngIf="inputVisible"
+                    type="text"
+                    [(ngModel)]="inputValue"
+                    [ngModelOptions]="{ standalone: true }"
+                    style="width: 78px"
+                    (blur)="handleInputConfirm()"
+                    (keydown.enter)="handleInputConfirm()"
+                  />
+                </nz-card>
+                <ng-template #extraTemplate>
+                  <!-- <a>More</a> -->
+                </ng-template>
+              </div>
+            </form>
+          </div>
+        </nz-content>
+        <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>
+      </nz-layout>
+    </nz-layout>
+  </div>
+</div>
+
+<ng-template #postSuccessNotification let-notification>
+  <div class="ant-notification-notice-content">
+    <div>
+      <div class="ant-notification-notice-message">Xuất bản thành công</div>
+      <div class="ant-notification-notice-description">
+        <!-- Bài viết <b>{{lastPostedPost.name}}</b> của bạn đã được xuất bản thành công -->
+      </div>
+      <span class="ant-notification-notice-btn">
+        <button nz-button nzSize="small" (click)="notification.close()">
+          <span>OK</span>
+        </button>
+        <button
+        class="ml-12"
+          nz-button
+          nzType="primary"
+          nzSize="small"
+          (click)="goToPost();notification.close()"
+        >
+          <span>Xem bài viết</span>
+        </button>
+      </span>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #updateSuccessNotification let-notification>
+  <div class="ant-notification-notice-content">
+    <div>
+      <div class="ant-notification-notice-message">Cập nhật thành công</div>
+      <div class="ant-notification-notice-description">
+        <!-- Bài viết <b>{{lastPostedPost.name}}</b> của bạn đã được xuất bản thành công -->
+      </div>
+      <span class="ant-notification-notice-btn">
+        <button nz-button nzSize="small" (click)="notification.close()">
+          <span>OK</span>
+        </button>
+        <button
+        class="ml-12"
+          nz-button
+          nzType="primary"
+          nzSize="small"
+          (click)="goToPost();notification.close()"
+        >
+          <span>Xem bài viết</span>
+        </button>
+      </span>
+    </div>
+  </div>
+</ng-template>

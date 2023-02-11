@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  // postBaseUrl: 'https://63e1cd6c4324b12d963ecbe9.mockapi.io/salad001',
+  // test
+  postBaseUrl:'http://localhost:3000/post',
 };
 
 /*

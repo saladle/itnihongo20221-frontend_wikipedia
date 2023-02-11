@@ -72,7 +72,7 @@
 
   <div class="body">
     <div class="search-word">
-      <h1>Bách khoa toàn thư</h1>
+      <h1>{{ currentPost!.name! }}</h1>
     </div>
     <div class="body-layout flr">
       <div class="body__left-bar flc">
@@ -93,99 +93,73 @@
         <div class="content__header flr">
           <div class="content__header-text">Chi tiết</div>
           <div class="content__header-like flr">
-            <p class="like__text">14326</p>
+            <p class="like__text">{{ currentPost.like! }}</p>
             <i class="fa-solid fa-thumbs-up like__icon"></i>
           </div>
         </div>
         <div class="content__body">
-          <div class="body__edited-date">23/05/2022</div>
+          <div class="body__edited-date">
+            {{ currentPost.createdAt | date : "dd/MM/yyy" }}
+          </div>
           <div class="body__description">
-            Daniel Kaluuya, né le 24 février 1989 à Londres, est un acteur
-            britannique. Il commence sa carrière par le théâtre puis se fait
-            remarquer à la télévision, dans quelques épisodes de la série
-            britannique Skins. Il joue ensuite des rôles importants dans les
-            minis-séries The Fades et Babylon. Il est finalement révélé au grand
-            public grâce au film d'horreur plébiscité Get Out, qui lui vaut de
-            nombreux prix et nominations. En 2018, il joue dans le blockbuster à
-            succès Black Panther et dans le drame salué Les Veuves. Il remporte
-            l'Oscar du meilleur acteur dans un second rôle en 2021 pour son
-            interprétation du militant afro-américan Fred Hampton dans le film
-            Judas and the Black Messiah.
+            <quill-view
+              [content]="currentPost.description"
+              format="html"
+              theme="snow"
+            ></quill-view>
           </div>
         </div>
       </div>
       <div class="body__right-bar">
         <div class="bar__switch">
+          <button *ngIf="currentPost.userId == currentUser.id" nz-button (click)="onClickEditPost()"><i class="fa-solid fa-pen-to-square mr-12"></i> Sửa</button>
+          <div *ngIf="currentPost.userId != currentUser.id"></div>
           <nz-switch [(ngModel)]="barSwitch"></nz-switch>
         </div>
         <ng-container *ngIf="barSwitch">
           <div class="bar-item">
             <div class="item__header flr">
               <div class="item__title flr">
-                <div class="item__title-text">Các tác giả</div>
-                <div class="item__title-number">12</div>
+                <div class="item__title-text">Tác giả</div>
+                <!-- <div class="item__title-number">12</div> -->
               </div>
-              <div class="item__action">Xem tất cả</div>
             </div>
-            <div class="item__body">
-              <nz-avatar-group>
+            <div class="item__body p-12">
+              <div class="w-100 flr aic">
                 <nz-avatar
                   nzIcon="user"
                   nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
                   [nzSize]="'large'"
                 ></nz-avatar>
-                <nz-avatar
-                  style="background-color: #f56a00"
-                  nzText="U"
-                ></nz-avatar>
-                <nz-avatar
-                  style="background-color: #87d068"
-                  nz-tooltip
-                  nzTooltipTitle="NG-ZORRO User"
-                  nzIcon="user"
-                ></nz-avatar>
-                <nz-avatar
-                  style="background-color: #1890ff"
-                  nzText="NG"
-                ></nz-avatar>
-                <nz-avatar
-                  style="background-color: #fde3cf; color: #f56a00"
-                  nzText="+2"
-                ></nz-avatar>
-              </nz-avatar-group>
+                <h3 class="ml-12">{{ currentPost.userName }}</h3>
+              </div>
             </div>
           </div>
           <div class="bar-item">
             <div class="item__header">
               <div class="item__title">
-                <div class="item__title-text">Tác giả tương tự</div>
+                <div class="item__title-text">Thể loại</div>
               </div>
             </div>
-            <div class="item__body">
-              <nz-avatar-group>
-                <nz-avatar
-                  nzIcon="user"
-                  nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                ></nz-avatar>
-                <nz-avatar
-                  style="background-color: #f56a00"
-                  nzText="U"
-                ></nz-avatar>
-                <nz-avatar
-                  style="background-color: #87d068"
-                  nz-tooltip
-                  nzTooltipTitle="NG-ZORRO User"
-                  nzIcon="user"
-                ></nz-avatar>
-                <nz-avatar
-                  style="background-color: #1890ff"
-                  nzText="NG"
-                ></nz-avatar>
-                <nz-avatar
-                  style="background-color: #fde3cf; color: #f56a00"
-                  nzText="+2"
-                ></nz-avatar>
-              </nz-avatar-group>
+            <div class="item__body p-12">
+              <nz-select
+                [nzMaxTagCount]="3"
+                [nzMaxTagPlaceholder]="tagPlaceHolder"
+                nzMode="multiple"
+                nzPlaceHolder="Chọn thể loại"
+                [(ngModel)]="currentPost.topic"
+                [nzDisabled]="true"
+                class="wp-100"
+              >
+                <nz-option
+                  *ngFor="let item of currentPost.topic"
+                  [nzLabel]="item"
+                  [nzValue]="item"
+                ></nz-option>
+              </nz-select>
+              <ng-template #tagPlaceHolder let-selectedList
+                >and {{ selectedList.length }} more selected</ng-template
+              >
             </div>
           </div>
           <div class="bar-item">
@@ -194,24 +168,23 @@
                 <div class="item__title-text">Nguồn tham khảo</div>
               </div>
             </div>
-            <div class="item__body flc">
-              <div class="source__link">
-                <div class="source__link-text">
-                  https://www.imdb.com/name/nm2257207/
+            <div class="item__body my-12 flc">
+              <ng-container
+                *ngFor="let link of currentPost.references; let i = index"
+                class="flc"
+              >
+                <div class="source__link">
+                  <div class="source__link-text">
+                    {{ link }}
+                  </div>
+                  <div class="source__link-action">
+                    <i class="fa-solid fa-copy"></i>
+                  </div>
                 </div>
-                <div class="source__link-action">
-                  <i class="fa-solid fa-copy"></i>
-                </div>
-              </div>
-              <nz-divider></nz-divider>
-              <div class="source__link flr">
-                <div class="source__link-text">
-                  https://www.imdb.com/name/nm2257207/fwdasfsadfasdfasdfasdcdsc
-                </div>
-                <div class="source__link-action">
-                  <i class="fa-solid fa-copy source__link-icon"></i>
-                </div>
-              </div>
+                <nz-divider
+                  *ngIf="i < currentPost.references.length - 1"
+                ></nz-divider>
+              </ng-container>
             </div>
           </div>
         </ng-container>

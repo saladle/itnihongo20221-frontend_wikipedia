@@ -30,18 +30,21 @@ export class AuthService {
     }
     this.usersList = [
       {
+        id: '0001',
         username: 'admin',
         password: 'admin',
         role: Role.Admin,
         name: 'Admin',
       },
       {
+        id: '0002',
         username: 'user',
         password: 'user',
         role: Role.User,
         name: 'User',
       },
       {
+        id: '0003',
         username: 'guess',
         password: 'guess',
         role: Role.Guess,

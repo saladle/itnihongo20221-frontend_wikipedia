@@ -1,0 +1,225 @@
+.header {
+  height: 117px;
+  /* background-color: red; */
+  line-height: 117px;
+  padding: 0 60px;
+}
+
+.header .header__logo {
+  align-items: center;
+  cursor: pointer;
+}
+
+.header .header__logo .header__logo-img {
+  height: 73px;
+  margin-right: 15px;
+}
+
+.header .header__logo .header__logo-text {
+  font-family: Poppins;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 48px;
+  letter-spacing: 0.01em;
+  text-align: center;
+}
+
+.header .header__search {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header .header__search nz-input-group {
+  width: 344px;
+}
+
+.header .header__action {
+  width: 170px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 60px;
+}
+
+.header .header__action .action__language-icon {
+  height: 40px;
+  cursor: pointer;
+}
+
+.header .header__action .action__add {
+  height: 40px;
+  cursor: pointer;
+}
+
+.header .header__action .action__add-icon {
+  font-size: 40px;
+}
+
+.header .header__action .action__avatar-img {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.body .search-word {
+  text-align: center;
+}
+
+.body .body-layout {
+  justify-content: space-between;
+}
+
+.body .body-layout .content__header {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.body .body-layout .content__header-text {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 48px;
+  letter-spacing: 0.01em;
+}
+
+.body .body-layout .content__header-like {
+  background-color: #000;
+  color: #fff;
+  align-items: center;
+  border-radius: 15px;
+  height: 27px;
+}
+
+.body .body-layout .like__text {
+  margin: 0 12px;
+}
+
+.body .body-layout .like__icon {
+  margin-right: 12px;
+}
+
+.body .body-layout .body__edited-date {
+  display: flex;
+  justify-content: end;
+  font-weight: 500;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.body .body-layout .content__body {
+  padding: 12px 40px 40px 40px;
+  background-color: #f9f9f9;
+}
+
+.body__left-bar {
+  width: 368px;
+  /* background-color: red; */
+  /* height: 400px; */
+  padding: 0 48px 48px 48px;
+}
+
+.body__left-bar .content__img {
+  filter: drop-shadow(0px 4px 30px rgba(0, 0, 0, 0.25));
+  border-radius: 15px 0px;
+  height: 316px;
+  object-fit: cover;
+  margin-bottom: 48px;
+}
+
+.body__main-content {
+  flex: 1;
+}
+
+.body__right-bar {
+  width: 368px;
+  /* background-color: red; */
+  /* height: 400px; */
+  padding: 0 48px 48px 48px;
+}
+
+.body__right-bar .bar__switch {
+  display: flex;
+  justify-content: space-between;
+}
+
+.body__right-bar .bar-item {
+  margin-top: 42px;
+}
+
+.body__right-bar .bar-item .item__header {
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.body__right-bar .bar-item .item__title {
+  align-items: center;
+}
+
+.body__right-bar .bar-item .item__title-text {
+  font-weight: 700;
+}
+
+.body__right-bar .bar-item .item__title-number {
+  background-color: #000;
+  color: #fff;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 600;
+  margin-left: 4px;
+}
+
+.body__right-bar .bar-item .item__action {
+  text-decoration: underline;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.body__right-bar .bar-item .item__body {
+  height: 100px;
+  background: #f8f8f8;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.body__right-bar .bar-item .item__body h3 {
+  margin-bottom: 0;
+}
+
+.body__right-bar .bar-item .ant-avatar {
+  width: 50px;
+  height: 50px;
+}
+
+.body__right-bar .bar-item .source__link {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 228px;
+}
+
+.body__right-bar .bar-item .source__link-text {
+  font-size: 10px;
+  flex-grow: 7;
+  width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.body__right-bar .bar-item .source__link-action {
+  flex-grow: 3;
+  cursor: pointer;
+}
+
+.body__right-bar .bar-item .ant-divider-horizontal {
+  margin: 12px 0;
+}
